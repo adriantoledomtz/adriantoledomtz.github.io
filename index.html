@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Adrián Toledo | Portfolio Profesional</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <title>Adrián Toledo | Professional Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0d1117;
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --accent: #58a6ff;
-            --card-bg: #161b22;
-            --border: #30363d;
+            --bg-color: #030303; 
+            --text-main: #f5f5f7;
+            --text-secondary: #a1a1a6;
+            --accent: #ffffff; 
+            --border-light: rgba(255, 255, 255, 0.1);
+            --card-bg: rgba(20, 20, 22, 0.5);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -22,189 +22,428 @@
             background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
-            padding: 0 20px;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .container { max-width: 900px; margin: 0 auto; padding: 60px 0; }
+        #particle-canvas {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: -1; opacity: 0.4; pointer-events: none;
+        }
 
-        /* HERO SECTION */
-        header { margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
-        h1 { font-size: 3rem; font-weight: 800; color: #ffffff; letter-spacing: -1px; margin-bottom: 10px; }
-        .tagline { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 1.1rem; margin-bottom: 20px; }
-        .bio { font-size: 1.1rem; color: var(--text-muted); max-width: 700px; margin-bottom: 30px; }
+        .container { 
+            max-width: 1000px; margin: 0 auto; padding: 100px 30px; position: relative; z-index: 1; 
+        }
+
+        /* TYPOGRAPHY */
+        h1 { font-size: 3.5rem; font-weight: 700; letter-spacing: -1px; margin-bottom: 5px; }
+        h2 { font-size: 2rem; font-weight: 600; letter-spacing: -0.5px; border-bottom: 1px solid var(--border-light); padding-bottom: 15px; margin: 80px 0 30px 0; }
+        h3 { font-size: 1.25rem; font-weight: 600; color: var(--text-main); margin-bottom: 5px; }
+        .subtitle { font-size: 1.25rem; color: var(--text-secondary); font-weight: 400; margin-bottom: 30px; }
+        .bio { font-size: 1.1rem; color: var(--text-secondary); max-width: 800px; margin-bottom: 40px; line-height: 1.8; }
         
-        .social-links a {
-            color: var(--text-main); text-decoration: none; border: 1px solid var(--border);
-            padding: 8px 16px; border-radius: 6px; margin-right: 10px; transition: 0.3s;
-            font-size: 0.9rem; font-weight: 600; display: inline-block;
+        a { color: var(--text-main); text-decoration: none; transition: 0.3s ease; }
+        a:hover { opacity: 0.7; }
+
+        /* BUTTONS */
+        .btn-group { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 40px; }
+        .btn {
+            border: 1px solid var(--border-light); padding: 12px 24px; border-radius: 30px;
+            font-size: 0.95rem; font-weight: 500; background: transparent; cursor: pointer;
         }
-        .social-links a:hover { background-color: var(--border); color: #fff; }
+        .btn:hover { background: var(--text-main); color: var(--bg-color); }
 
-        /* SECTIONS */
-        h2 { font-size: 1.8rem; margin-bottom: 20px; color: #fff; display: flex; align-items: center; }
-        h2::before { content: '>'; color: var(--accent); margin-right: 10px; font-family: 'Fira Code', monospace; }
-        section { margin-bottom: 60px; }
+        /* LISTS & TIMELINES */
+        .item-row { display: flex; flex-direction: column; padding: 25px 0; border-bottom: 1px solid var(--border-light); }
+        .item-row:last-child { border-bottom: none; }
+        .item-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; margin-bottom: 10px; }
+        .item-title { font-size: 1.2rem; font-weight: 600; }
+        .item-meta { font-size: 0.95rem; color: var(--text-secondary); font-weight: 500; }
+        .item-desc { color: var(--text-secondary); font-size: 1rem; margin-bottom: 10px; }
+        
+        ul.bullet-list { list-style-type: disc; padding-left: 20px; color: var(--text-secondary); font-size: 0.95rem; }
+        ul.bullet-list li { margin-bottom: 6px; }
 
-        /* TABS (FILTRO DE PROYECTOS) */
-        .tabs { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-        .tab-btn {
-            background: transparent; color: var(--text-muted); border: 1px solid var(--border);
-            padding: 8px 16px; border-radius: 20px; cursor: pointer; font-family: 'Inter', sans-serif;
-            transition: 0.3s; font-size: 0.9rem;
-        }
-        .tab-btn.active, .tab-btn:hover { background: var(--accent); color: var(--bg-color); border-color: var(--accent); font-weight: 600; }
+        /* GRIDS */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        
+        .card { background: var(--card-bg); border: 1px solid var(--border-light); border-radius: 12px; padding: 25px; backdrop-filter: blur(10px); }
+        
+        /* TAGS */
+        .tags-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 15px; }
+        .tag { border: 1px solid var(--border-light); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; color: var(--text-secondary); }
 
-        /* PROJECT CARDS */
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px; }
-        .card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 25px; transition: 0.3s; }
-        .card:hover { border-color: var(--accent); transform: translateY(-3px); }
-        .card h3 { color: #fff; font-size: 1.3rem; margin-bottom: 10px; }
-        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; }
-        .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; }
-        .tech-tag { font-family: 'Fira Code', monospace; font-size: 0.75rem; background: rgba(88, 166, 255, 0.1); color: var(--accent); padding: 4px 8px; border-radius: 4px; }
-
-        /* CV DOWNLOADS */
-        .cv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-        .cv-card {
-            background-color: var(--card-bg); border: 1px solid var(--border); padding: 20px;
-            border-radius: 8px; text-align: center; text-decoration: none; transition: 0.3s;
-        }
-        .cv-card:hover { background-color: var(--border); }
-        .cv-card h4 { color: #fff; margin-bottom: 5px; font-size: 1.1rem; }
-        .cv-card span { color: var(--text-muted); font-size: 0.85rem; }
-
-        /* FOOTER */
-        footer { border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 60px 0 20px 0; color: var(--text-secondary); font-size: 0.9rem; border-top: 1px solid var(--border-light); margin-top: 80px; }
     </style>
 </head>
 <body>
+
+    <canvas id="particle-canvas"></canvas>
 
     <div class="container">
         
         <!-- HEADER -->
         <header>
             <h1>Adrián Toledo Martínez</h1>
-            <div class="tagline">Math & Telecom Engineering | Strategy | Operations</div>
+            <div class="subtitle">Dual-Degree Candidate in Mathematics & Telecommunications Engineering</div>
             <p class="bio">
-                Candidato al Doble Grado en Matemáticas e Ingeniería de Telecomunicaciones (UPV & TUM). 
-                Combino un enfoque analítico profundo (Data, IA, Modelado Matemático) con experiencia probada liderando equipos en situaciones de alta presión logística y corporativa.
+                Combining an advanced technical background in test development engineering and mathematical modeling with strong executive leadership and crisis management experience. Proven track record in international academic research (CERN), high-tech innovation, and institutional representation. Driven by complex problem-solving and capable of leading multidisciplinary teams under pressure.
             </p>
-            <div class="social-links">
-                <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">LinkedIn</a>
-                <a href="mailto:adriantoledo@duck.com">Email</a>
+            <div class="btn-group">
+                <a href="https://linkedin.com/in/adriantoledomtz" target="_blank" class="btn">LinkedIn Profile</a>
+                <a href="mailto:adriantoledo@duck.com" class="btn">Contact via Email</a>
             </div>
         </header>
 
-        <!-- PORTFOLIO / EXPERIENCE -->
-        <section>
-            <h2>Trayectoria y Proyectos</h2>
+        <!-- EDUCATION -->
+        <section id="education">
+            <h2>Education & Academic Excellence</h2>
             
-            <div class="tabs">
-                <button class="tab-btn active" onclick="filterSelection('all')">Todos</button>
-                <button class="tab-btn" onclick="filterSelection('tech')">Tech & Research (CERN)</button>
-                <button class="tab-btn" onclick="filterSelection('quant')">Quant & Strategy</button>
-                <button class="tab-btn" onclick="filterSelection('ops')">Crisis & Operations (UE)</button>
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Universitat Politècnica de València (UPV)</span>
+                    <span class="item-meta">Sep 2021 - Present | Valencia, Spain</span>
+                </div>
+                <div class="item-desc">Double Bachelor's Degree in Mathematics and Telecommunication Technologies & Services Engineering (EQF Level 6)</div>
+                <ul class="bullet-list">
+                    <li>Advanced mathematical modeling, numerical analysis, applied statistics, and optimization.</li>
+                    <li>Telecommunication systems, signal processing, electronics, computer networks, and software engineering.</li>
+                </ul>
             </div>
 
-            <div class="project-grid">
-                
-                <!-- Card 1: CERN -->
-                <div class="card filter-item tech">
-                    <h3>i2Planet & IA Generativa</h3>
-                    <p>Investigación y reto de innovación colaborando con CERN IdeaSquare. Análisis del impacto de IA generativa en la resolución de problemas complejos.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Deep Learning</span>
-                        <span class="tech-tag">Research</span>
-                        <span class="tech-tag">Innovation</span>
-                    </div>
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Technical University of Munich (TUM)</span>
+                    <span class="item-meta">Apr 2025 - Oct 2025 | Munich, Germany</span>
+                </div>
+                <div class="item-desc">ERASMUS Exchange Program - MSc in Electrical and Computer Engineering (EQF Level 7)</div>
+                <ul class="bullet-list">
+                    <li>Selected to complete Master's level coursework in emerging technologies and computing systems in a 100% international environment.</li>
+                </ul>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Honors & Awards</span></div>
+                <ul class="bullet-list">
+                    <li><strong>High School Diploma with Honors (Matrícula de Honor):</strong> Perfect average grade of 10/10 in Science Baccalaureate (May 2021).</li>
+                    <li><strong>Extraordinary Award for Academic Performance:</strong> Secondary Education (ESO), granted by the Regional Ministry of Education (Sep 2019).</li>
+                    <li><strong>Extraordinary Award for Academic Performance:</strong> Primary Education, granted by the Regional Ministry of Education (Nov 2015).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- WORK EXPERIENCE -->
+        <section id="experience">
+            <h2>Professional Experience</h2>
+
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Celestica</span>
+                    <span class="item-meta">Feb 2026 - Aug 2026 | Valencia, Spain</span>
+                </div>
+                <div class="item-desc">Test Design & Development Engineering Intern (Aerospace & Defense / Health Tech)</div>
+                <ul class="bullet-list">
+                    <li>Designed, automated, and validated high-reliability test engineering sequences for complex hardware and embedded systems using Agile methodologies.</li>
+                    <li>Applied mathematical, signal processing, and programmatic principles to optimize automated test coverage and system diagnostics.</li>
+                    <li>Ensured strict compliance with international defense regulations (ITAR / EAR) and medical device quality standards (FDA).</li>
+                </ul>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Fundación Servipoli (UPV)</span>
+                    <span class="item-meta">Oct 2024 - Jan 2025 | Valencia, Spain</span>
+                </div>
+                <div class="item-desc">Customer Service & Information Staff</div>
+                <ul class="bullet-list">
+                    <li>Provided support and information services during the "Ciencia Lab" events at the university campus.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PROJECTS & RESEARCH -->
+        <section id="projects">
+            <h2>Research, Strategy & Innovation Projects</h2>
+
+            <div class="grid-2">
+                <div class="card">
+                    <h3>i2Planet - CERN IdeaSquare</h3>
+                    <p class="item-desc">Challenge-Based Innovation (CERN & Esade) | Sep 2024</p>
+                    <p class="item-desc" style="font-size:0.9rem;">Co-led strategic problem-solving streams within an international team (15 nationalities, 4 universities). Pitched a technology-driven proposal integrating deep tech and market feasibility.</p>
                 </div>
 
-                <!-- Card 2: Celestica -->
-                <div class="card filter-item tech">
-                    <h3>Test Design Engineering</h3>
-                    <p>Desarrollo de secuencias de test para hardware aeroespacial y médico (Celestica). Cumplimiento de normativas ITAR y FDA bajo metodologías Agile.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Python</span>
-                        <span class="tech-tag">NI TestStand</span>
-                        <span class="tech-tag">Hardware</span>
-                    </div>
+                <div class="card">
+                    <h3>BeHealth: Strategy & Social Impact</h3>
+                    <p class="item-desc">AECC "Proyecto Zero" | May 2024 - Present</p>
+                    <p class="item-desc" style="font-size:0.9rem;">Co-created 'BeHealth', driving product development and stakeholder outreach aimed at a smoke-free generation. Formally presented to the Spanish Minister of Health in 2024.</p>
                 </div>
 
-                <!-- Card 3: Estrategia -->
-                <div class="card filter-item quant">
+                <div class="card">
                     <h3>Top Talent Corporate Strategy</h3>
-                    <p>Desarrollo de propuestas estratégicas de negocio presentadas ante directivos de DIGI Spain y Banco Santander en la Ciudad Financiera.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Business Strategy</span>
-                        <span class="tech-tag">Data Analysis</span>
-                    </div>
+                    <p class="item-desc">Banco Santander HQ | May 2024</p>
+                    <p class="item-desc" style="font-size:0.9rem;">Corporate strategy challenge. Analyzed operations and pitched a strategic growth proposal for DIGI Spain to executive panels from 7 multinational corporations.</p>
                 </div>
 
-                <!-- Card 4: Operaciones -->
-                <div class="card filter-item ops">
-                    <h3>Gestión de Emergencias Tácticas</h3>
-                    <p>Jefe Local de Protección Civil y rescatista oficial en Circuit Ricardo Tormo (MotoGP, Formula E). Coordinación logística en inundaciones de 2024.</p>
-                    <div class="tech-stack">
-                        <span class="tech-tag">Crisis Management</span>
-                        <span class="tech-tag">Logistics</span>
-                        <span class="tech-tag">Leadership</span>
-                    </div>
+                <div class="card">
+                    <h3>Academic Publications (CERN/Springer)</h3>
+                    <p class="item-desc">Research Author | 2025 - 2026</p>
+                    <ul class="bullet-list" style="font-size:0.85rem;">
+                        <li><strong>Forthcoming (2026):</strong> "Design for Thinking as Transformative Education" (Springer Nature). Analyzing Gen AI on team dynamics at CERN.</li>
+                        <li><strong>Published (2025):</strong> "Data from Students' Use of Generative AI in Innovation Education" (CERN IdeaSquare Journal).</li>
+                    </ul>
                 </div>
-
             </div>
         </section>
 
-        <!-- CV DOWNLOADS -->
-        <section>
-            <h2>Descarga mi Currículum</h2>
-            <p style="color: var(--text-muted); margin-bottom: 20px;">Selecciona el perfil adaptado a tu sector industrial:</p>
+        <!-- LEADERSHIP & VOLUNTEERING -->
+        <section id="leadership">
+            <h2>Leadership, Crisis Management & Volunteering</h2>
+
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Civil Protection - Head of Local Unit</span>
+                    <span class="item-meta">Aug 2019 - Present | Vilamarxant, Spain</span>
+                </div>
+                <div class="item-desc">Lead local emergency operations, tactical logistics, and volunteer response teams. Collaborate directly with State Security Forces (FCSE), Armed Forces, firefighters, and medical personnel. Trained in first aid, fire suppression, and emergency psychology.</div>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Circuit Ricardo Tormo - Track Rescue Official</span>
+                    <span class="item-meta">2020 - Present | Valencia, Spain</span>
+                </div>
+                <div class="item-desc">Licensed specialist (Royal Spanish Automobile/Motorcycle Federations) for high-speed technical track rescue, heavy machinery operation, and rapid emergency intervention during world-class events (MotoGP, Formula E).</div>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Institutional Policy & Student Representation</span>
+                    <span class="item-meta">2021 - Present | National & UPV Level</span>
+                </div>
+                <ul class="bullet-list">
+                    <li><strong>Main Student Representative (ETSIT) & Sectoral Coordinator (CEUPV):</strong> Highest-ranking student representative, coordinating academic affairs across governing bodies including the University Senate.</li>
+                    <li><strong>National Assembly President & Board Member (ANEM):</strong> Board member for University Policy representing mathematics students nationwide; organized the 2025 National General Assembly.</li>
+                </ul>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header">
+                    <span class="item-title">Social Relief & Healthcare Volunteering</span>
+                    <span class="item-meta">2021 - Present</span>
+                </div>
+                <ul class="bullet-list">
+                    <li><strong>2024 DANA Floods Relief:</strong> Coordinated supply logistics from Bilbao/Alicante and directed aid teams across 8 affected municipalities. UPV Coordinator for academic reinforcement programs.</li>
+                    <li><strong>Aspanion:</strong> Hospital accompaniment for pediatric oncology patients.</li>
+                    <li><strong>Sports & Social:</strong> Volunteered in major events (Spartan Race, Marítim Triathlon) and initiatives for the AECC and American Space Valencia.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS & CONFERENCES -->
+        <section id="certifications">
+            <h2>Certifications, Programs & Conferences</h2>
             
-            <div class="cv-grid">
-                <!-- Nota: Sustituye el "#" por el enlace real a tus PDFs cuando los tengas alojados -->
-                <a href="#" class="cv-card">
-                    <h4>Quantitative & Strategy</h4>
-                    <span>CV 1 Página (Inglés)</span>
-                </a>
-                <a href="#" class="cv-card">
-                    <h4>Engineering & Research</h4>
-                    <span>CV 2 Páginas (Inglés)</span>
-                </a>
-                <a href="#" class="cv-card">
-                    <h4>Public Policy & Ops (Europass)</h4>
-                    <span>CV 3 Páginas (UE)</span>
-                </a>
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Executive & Innovation Programs</span></div>
+                <ul class="bullet-list">
+                    <li><strong>Skills UP (UPV, 2026):</strong> High-performance talent program; executive networking with Airbus, Siemens, PwC, BBVA, NTT DATA.</li>
+                    <li><strong>Executive Leadership & Strategic Management (2025):</strong> Business strategy training with direct sessions from CEOs and visits to corporate HQs (Porcelanosa, Air Nostrum).</li>
+                    <li><strong>Top Talent Recruitment "QUÉDATE" (2025):</strong> Exclusive high-potential talent networking with Deloitte, EY, Ford, GMV.</li>
+                    <li><strong>Santander X Explorer (2025):</strong> 96-hour intensive project incubation and lean startup methodology program.</li>
+                    <li><strong>Lombard Design Thinking & 66 Incubation (2025):</strong> Advanced certification in Silicon Valley innovation, market research, and product fit.</li>
+                </ul>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Technical Certifications & Training</span></div>
+                <ul class="bullet-list">
+                    <li><strong>Qualcomm 5G Associate-Level Certification (2026):</strong> 5G wireless architecture and radio access protocols.</li>
+                    <li><strong>Deep Web & Cybersecurity (2024):</strong> EC-Council specialized training.</li>
+                    <li><strong>Intelligence Masterclass - CNI (2022):</strong> Strategic national/international security session led by the Director of the Spanish National Intelligence Centre.</li>
+                    <li><strong>Advanced Physics Training - OEF (2021):</strong> 72 hours of advanced physics instruction at UV/UPV for the Spanish Physics Olympiad.</li>
+                    <li><strong>Antenna Workshop (2023):</strong> Practical construction of 5 hardware antennas and QSO execution at RadioClub UPV.</li>
+                    <li><strong>Emergency Management:</strong> Large Events Operations Course (2026) and Civil Protection Basic Training (2020) by IVASPE.</li>
+                </ul>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Conferences</span></div>
+                <ul class="bullet-list">
+                    <li>Interactive Workshop Leader at the National General Assembly of Mathematics Students (ENEM 2026).</li>
+                    <li>Roundtable Panelist at the XXV Mathematical Modelling in Engineering & Human Behaviour Conference (MME&HB 2023).</li>
+                </ul>
             </div>
         </section>
 
-        <!-- FOOTER -->
+        <!-- SKILLS, LANGUAGES & MEMBERSHIPS -->
+        <section id="skills">
+            <h2>Skills, Languages & Memberships</h2>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Technical & Engineering Skills</span></div>
+                <div class="tags-container">
+                    <span class="tag">Python</span>
+                    <span class="tag">MATLAB</span>
+                    <span class="tag">Mathematica</span>
+                    <span class="tag">R (Statistics)</span>
+                    <span class="tag">NI TestStand</span>
+                    <span class="tag">LabView</span>
+                    <span class="tag">Intel Quartus (FPGA)</span>
+                    <span class="tag">C / C#</span>
+                    <span class="tag">LaTeX</span>
+                    <span class="tag">Deep Learning</span>
+                    <span class="tag">Mathematical Modelling</span>
+                    <span class="tag">Agile Development</span>
+                    <span class="tag">ITAR/EAR & FDA Compliance</span>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Soft Skills & Leadership</span></div>
+                <div class="tags-container">
+                    <span class="tag">Crisis Management</span>
+                    <span class="tag">Multidisciplinary Team Leadership</span>
+                    <span class="tag">Strategic Negotiation</span>
+                    <span class="tag">Public Relations</span>
+                    <span class="tag">Disruptive Innovation</span>
+                    <span class="tag">Stakeholder Management</span>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Languages</span></div>
+                <div class="tags-container">
+                    <span class="tag">Spanish (Native)</span>
+                    <span class="tag">English (C1)</span>
+                    <span class="tag">Catalan/Valenciano (C2)</span>
+                    <span class="tag">German (A2/B1)</span>
+                    <span class="tag">French (A2)</span>
+                </div>
+            </div>
+
+            <div class="item-row">
+                <div class="item-header"><span class="item-title">Networks & Memberships</span></div>
+                <ul class="bullet-list" style="margin-top: 10px;">
+                    <li><strong>Nova Talent Member:</strong> Global network connecting the top 3% of professional talent.</li>
+                    <li><strong>Next Talent Crew:</strong> StartUp Valencia's platform for high-potential tech profiles.</li>
+                    <li><strong>COITT / AEGITT:</strong> Official Registered Member (Col. No. 17749 / Assoc. No. 17618).</li>
+                    <li><strong>RSME:</strong> Member of the Royal Spanish Mathematical Society.</li>
+                </ul>
+            </div>
+            
+            <div class="item-row" style="border:none;">
+                <div class="item-header"><span class="item-title">Additional Data</span></div>
+                <div class="item-desc">Driving Licenses: B (Car), A1 (Motorcycle), AM. Own vehicle.</div>
+            </div>
+        </section>
+
         <footer>
-            <p>&copy; 2026 Adrián Toledo Martínez. Diseñado desde cero.</p>
+            <p>&copy; 2026 Adrián Toledo Martínez.</p>
         </footer>
 
     </div>
 
-    <!-- SCRIPT PARA EL FILTRO -->
+    <!-- SCRIPT PARTICULAS -->
     <script>
-        filterSelection("all")
-        function filterSelection(c) {
-            var x, i;
-            x = document.getElementsByClassName("filter-item");
-            if (c == "all") c = "";
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-                if (x[i].className.indexOf(c) > -1) {
-                    x[i].style.display = "block";
-                }
+        const canvas = document.getElementById("particle-canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 100 };
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y; this.directionX = directionX;
+                this.directionY = directionY; this.size = size; this.color = color;
             }
-            
-            var btns = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < btns.length; i++) {
-                btns[i].className = btns[i].className.replace(" active", "");
-                if (btns[i].getAttribute("onclick").includes(c || 'all')) {
-                    btns[i].className += " active";
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance < mouse.radius + this.size) {
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 1;
+                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 1;
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 1;
+                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 1;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 18000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 1.5) + 0.5;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 0.5) - 0.25;
+                let directionY = (Math.random() * 0.5) - 0.25;
+                let color = '#333333';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                    + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 12) * (canvas.height / 12)) {
+                        opacityValue = 1 - (distance / 20000);
+                        ctx.strokeStyle = 'rgba(255, 255, 255,' + opacityValue * 0.1 + ')';
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
                 }
             }
         }
+
+        window.addEventListener('resize', function() {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        window.addEventListener('mouseout', function() {
+            mouse.x = undefined; mouse.y = undefined;
+        });
+
+        init();
+        animate();
     </script>
 </body>
 </html>
