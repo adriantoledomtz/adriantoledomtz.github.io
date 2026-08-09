@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrián Toledo | Quant & Tech Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050505; /* Fondo casi negro puro */
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --accent: #58a6ff; /* Azul eléctrico / Tech */
+            --card-bg: rgba(22, 27, 34, 0.6); /* Transparente para que se vea el fondo */
+            --border: #30363d;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* CANVAS DE PARTÍCULAS (Fondo animado) */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Lo enviamos al fondo */
+            opacity: 0.6; /* Sutil, no molesta a la lectura */
+        }
+
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            padding: 80px 20px; 
+            position: relative;
+            z-index: 1; /* El contenido va por encima del fondo */
+        }
+
+        /* HERO SECTION */
+        header { margin-bottom: 70px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
+        h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; letter-spacing: -1.5px; margin-bottom: 10px; }
+        .tagline { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 1.1rem; margin-bottom: 25px; }
+        .bio { font-size: 1.15rem; color: var(--text-muted); max-width: 750px; margin-bottom: 35px; }
+        
+        .social-links a {
+            color: var(--text-main); text-decoration: none; border: 1px solid var(--border);
+            padding: 10px 20px; border-radius: 4px; margin-right: 12px; transition: all 0.3s ease;
+            font-size: 0.9rem; font-family: 'Fira Code', monospace; backdrop-filter: blur(5px);
+        }
+        .social-links a:hover { background-color: var(--accent); color: var(--bg-color); border-color: var(--accent); }
+
+        /* SECTIONS */
+        h2 { font-size: 2rem; margin-bottom: 30px; color: #fff; font-weight: 600; }
+        h2::before { content: '~/'; color: var(--accent); margin-right: 10px; font-family: 'Fira Code', monospace; font-weight: 400;}
+        section { margin-bottom: 80px; }
+
+        /* PROJECT CARDS */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; }
+        .card { 
+            background-color: var(--card-bg); 
+            border: 1px solid var(--border); 
+            border-radius: 6px; 
+            padding: 30px; 
+            transition: all 0.4s ease; 
+            backdrop-filter: blur(10px); /* Efecto cristal */
+        }
+        .card:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(88, 166, 255, 0.1); }
+        .card h3 { color: #fff; font-size: 1.4rem; margin-bottom: 15px; }
+        .card p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 20px; }
+        
+        .tech-stack { display: flex; gap: 10px; flex-wrap: wrap; }
+        .tech-tag { font-family: 'Fira Code', monospace; font-size: 0.75rem; border: 1px solid var(--border); color: var(--text-muted); padding: 4px 10px; border-radius: 20px; }
+
+        /* CV DOWNLOADS */
+        .cv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .cv-card {
+            background-color: transparent; border: 1px dashed var(--border); padding: 25px;
+            border-radius: 6px; text-align: center; text-decoration: none; transition: 0.3s;
+        }
+        .cv-card:hover { border-style: solid; border-color: var(--accent); background-color: rgba(88, 166, 255, 0.05); }
+        .cv-card h4 { color: #fff; margin-bottom: 8px; font-size: 1.1rem; }
+        .cv-card span { color: var(--accent); font-size: 0.85rem; font-family: 'Fira Code', monospace; }
+
+        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.85rem; }
+    </style>
+</head>
+<body>
+
+    <!-- Lienzo para las partículas matemáticas de fondo -->
+    <canvas id="particle-canvas"></canvas>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <header>
+            <h1>Adrián Toledo</h1>
+            <div class="tagline">Math & Telecom Engineering | Quant Strategy | Tech Ops</div>
+            <p class="bio">
+                Candidato al Doble Grado en Matemáticas e Ingeniería de Telecomunicaciones (UPV & TUM). 
+                Combinando modelado matemático profundo y desarrollo de hardware/software con liderazgo comprobado en entornos de alta presión y gestión de crisis.
+            </p>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">linkedin()</a>
+                <a href="mailto:adriantoledo@duck.com">email()</a>
+            </div>
+        </header>
+
+        <!-- PROYECTOS -->
+        <section>
+            <h2>selected_projects</h2>
+            <div class="project-grid">
+                
+                <div class="card">
+                    <h3>Generative AI at CERN</h3>
+                    <p>Investigación en CERN IdeaSquare analizando el impacto de la Inteligencia Artificial generativa en la resolución de problemas técnicos complejos y dinámicas de innovación.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Research</span>
+                        <span class="tech-tag">Deep Learning</span>
+                        <span class="tech-tag">Data Analysis</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Aerospace & MedTech Testing</h3>
+                    <p>Desarrollo de ingeniería de secuencias de test de alta fiabilidad en Celestica. Implementación bajo estrictas normativas militares (ITAR) y médicas (FDA).</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Hardware/FPGA</span>
+                        <span class="tech-tag">Agile</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>Tactical Emergency Ops</h3>
+                    <p>Coordinador Jefe de Protección Civil y especialista de rescate en circuito de alta velocidad. Liderazgo logístico directo sobre el terreno en crisis y desastres (DANA 2024).</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Crisis Management</span>
+                        <span class="tech-tag">Leadership</span>
+                        <span class="tech-tag">Logistics</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- DESCARGA CV -->
+        <section>
+            <h2>download_resume</h2>
+            <div class="cv-grid">
+                <a href="#" class="cv-card">
+                    <h4>Quant & Strategy Profile</h4>
+                    <span>[ cv_strategy.pdf ]</span>
+                </a>
+                <a href="#" class="cv-card">
+                    <h4>Tech & Research Profile</h4>
+                    <span>[ cv_engineering.pdf ]</span>
+                </a>
+                <a href="#" class="cv-card">
+                    <h4>Public Policy & Ops</h4>
+                    <span>[ cv_europass.pdf ]</span>
+                </a>
+            </div>
+        </section>
+
+        <footer>
+            <p>System.out.print("© 2026 Adrián Toledo Martínez");</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE LAS PARTÍCULAS (No tocar, pura matemática visual) -->
+    <script>
+        const canvas = document.getElementById("particle-canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        let mouse = { x: null, y: null, radius: 100 };
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        class Particle {
+            constructor(x, y, directionX, directionY, size, color) {
+                this.x = x; this.y = y; this.directionX = directionX;
+                this.directionY = directionY; this.size = size; this.color = color;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+            update() {
+                if (this.x > canvas.width || this.x < 0) this.directionX = -this.directionX;
+                if (this.y > canvas.height || this.y < 0) this.directionY = -this.directionY;
+
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                
+                // Efecto repulsión sutil con el ratón
+                if (distance < mouse.radius + this.size) {
+                    if (mouse.x < this.x && this.x < canvas.width - this.size * 10) this.x += 2;
+                    if (mouse.x > this.x && this.x > this.size * 10) this.x -= 2;
+                    if (mouse.y < this.y && this.y < canvas.height - this.size * 10) this.y += 2;
+                    if (mouse.y > this.y && this.y > this.size * 10) this.y -= 2;
+                }
+                this.x += this.directionX;
+                this.y += this.directionY;
+                this.draw();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 15000;
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2) + 1;
+                let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
+                let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
+                let directionX = (Math.random() * 1) - 0.5;
+                let directionY = (Math.random() * 1) - 0.5;
+                let color = '#30363d';
+                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
+            }
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+            }
+            connect();
+        }
+
+        function connect() {
+            let opacityValue = 1;
+            for (let a = 0; a < particlesArray.length; a++) {
+                for (let b = a; b < particlesArray.length; b++) {
+                    let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                    + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                    if (distance < (canvas.width / 10) * (canvas.height / 10)) {
+                        opacityValue = 1 - (distance / 15000);
+                        ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue * 0.2 + ')';
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                        ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        window.addEventListener('resize', function() {
+            canvas.width = innerWidth;
+            canvas.height = innerHeight;
+            init();
+        });
+
+        window.addEventListener('mouseout', function() {
+            mouse.x = undefined; mouse.y = undefined;
+        });
+
+        init();
+        animate();
+    </script>
+</body>
+</html>
