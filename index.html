@@ -50,7 +50,21 @@
         }
 
         h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; letter-spacing: -1px; margin-bottom: 10px; }
-        .tagline { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+        .tagline { 
+            font-family: 'Inter', sans-serif; 
+            font-weight: 600; 
+            color: var(--accent); 
+            font-size: 1.1rem; 
+            cursor: default;
+        }
+        
+        .tagline::before {
+            content: "Scientist | Engineer | Disruptive Innovation";
+        }
+        
+        .tagline:hover::before {
+            content: "Mathematician | Telecom | Entrepreneurship";
+        }
         
         /* PROFILE PICTURE & HOVER EFFECTS */
         .profile-container {
@@ -173,7 +187,7 @@
             <div class="header-title-row">
                 <div class="title-wrapper">
                     <h1>Adrián Toledo Martínez</h1>
-                    <div class="tagline">Math & Telecom Engineering | Strategy & Product | Emergency Operations</div>
+                    <div class="tagline"></div>
                 </div>
                 <div class="profile-container">
                     <img src="profile.jpg" alt="Adrián Toledo" class="profile-img">
@@ -209,8 +223,8 @@
                     <span class="meta">Sep 2021 - Present | Valencia, Spain</span>
                     <p>Double Bachelor's Degree in Mathematics and Telecommunication Technologies and Services Engineering (EQF Level 6).</p>
                     <div class="tech-stack">
-                        <span class="tech-tag">Applied Math</span>
-                        <span class="tech-tag">Signal Processing</span>
+                        <span class="tech-tag">Mathematics</span>
+                        <span class="tech-tag">Telecommunications</span>
                     </div>
                 </div>
                 <div class="card">
@@ -235,8 +249,10 @@
 
         <!-- SECTION: EXPERIENCE & PROJECTS -->
         <div id="experience" class="cv-section active">
-            <h2>Experience & Projects</h2>
-            <div class="grid-2">
+            
+            <!-- SUBSECTION 1: EXPERIENCE -->
+            <h2 style="margin-bottom: 20px;">Professional Experience</h2>
+            <div class="grid-2" style="margin-bottom: 50px;">
                 <div class="card">
                     <h3>Celestica - Test Design Engineering</h3>
                     <span class="meta">Feb 2026 - Aug 2026 | Valencia, Spain</span>
@@ -251,6 +267,16 @@
                         <span class="tech-tag">Hardware/FPGA</span>
                     </div>
                 </div>
+                <div class="card">
+                    <h3>Fundación Servipoli (UPV)</h3>
+                    <span class="meta">Oct 2024 - Jan 2025 | Valencia, Spain</span>
+                    <p>Customer Service & Information Staff. Provided support during the "Ciencia Lab" events at the university campus.</p>
+                </div>
+            </div>
+
+            <!-- SUBSECTION 2: PROJECTS & RESEARCH -->
+            <h2 style="margin-bottom: 20px;">Projects & Research</h2>
+            <div class="grid-2">
                 <div class="card">
                     <h3>CERN IdeaSquare - i2Planet</h3>
                     <span class="meta">Sep 2024 | Challenge-Based Innovation</span>
@@ -285,14 +311,9 @@
                         <li><strong>Published (2025):</strong> "Data from Students' Use of Generative AI in Innovation Education" (CERN Journal).</li>
                     </ul>
                 </div>
-                <div class="card">
-                    <h3>Fundación Servipoli (UPV)</h3>
-                    <span class="meta">Oct 2024 - Jan 2025 | Valencia, Spain</span>
-                    <p>Customer Service & Information Staff. Provided support during the "Ciencia Lab" events at the university campus.</p>
-                </div>
             </div>
         </div>
-
+        
         <!-- SECTION: LEADERSHIP -->
         <div id="leadership" class="cv-section active">
             <h2>Leadership & Volunteering</h2>
