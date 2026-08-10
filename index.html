@@ -11,7 +11,7 @@
             --bg-color: #050505; 
             --text-main: #e6edf3;
             --text-muted: #8b949e;
-            --accent: #58a6ff; 
+            --accent: #7CFF01; /* Verde Monster */
             --card-bg: rgba(22, 27, 34, 0.6); 
             --border: #30363d;
         }
@@ -55,15 +55,40 @@
             font-weight: 600; 
             color: var(--accent); 
             font-size: 1.1rem; 
+            margin-bottom: 25px;
+            display: inline-flex; /* Mantiene los elementos en línea */
+            align-items: center;
+            gap: 12px; /* Espacio exacto alrededor de las barras */
             cursor: default;
         }
         
-        .tagline::before {
-            content: "Scientist | Engineer | Disruptive Innovation";
+        .tag-term {
+            display: inline-grid; /* Truco de la caja para que no se mueva nada */
+            text-align: center;
         }
         
-        .tagline:hover::before {
-            content: "Mathematician | Telecom | Entrepreneurship";
+        .t-def, .t-hov {
+            grid-area: 1 / 1; /* Pone ambas palabras en el mismo sitio */
+            transition: all 0.3s ease;
+        }
+        
+        .t-hov {
+            opacity: 0;
+            transform: translateY(10px); /* Prepara la palabra nueva abajo */
+        }
+        
+        .tagline:hover .t-def {
+            opacity: 0;
+            transform: translateY(-10px); /* Sube la palabra original */
+        }
+        
+        .tagline:hover .t-hov {
+            opacity: 1;
+            transform: translateY(0); /* Entra la nueva */
+        }
+        
+        .tag-sep {
+            color: var(--text-muted); /* Hace que las barras sean un poco más sutiles */
         }
         
         /* PROFILE PICTURE & HOVER EFFECTS */
@@ -131,6 +156,20 @@
             font-size: 0.95rem; font-family: 'Inter', sans-serif; font-weight: 600; backdrop-filter: blur(5px); display: inline-block; margin-bottom: 10px;
         }
         .social-links a:hover { background-color: var(--accent); color: var(--bg-color); border-color: var(--accent); }
+        /* ESTILOS DEL BOTÓN DE ENTREVISTA */
+        .social-links a.btn-book {
+            background-color: var(--accent);
+            color: var(--bg-color);
+            border-color: var(--accent);
+            font-weight: 700;
+            box-shadow: 0 0 10px rgba(124, 255, 1, 0.1);
+        }
+        .social-links a.btn-book:hover {
+            background-color: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 20px rgba(124, 255, 1, 0.6);
+            transform: translateY(-2px);
+        }
 
         /* INTERACTIVE TABS */
         .tabs { display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
@@ -187,7 +226,22 @@
             <div class="header-title-row">
                 <div class="title-wrapper">
                     <h1>Adrián Toledo Martínez</h1>
-                    <div class="tagline"></div>
+                    <div class="tagline">
+    <span class="tag-term">
+        <span class="t-def">Scientist</span>
+        <span class="t-hov">Mathematician</span>
+    </span>
+    <span class="tag-sep">|</span>
+    <span class="tag-term">
+        <span class="t-def">Engineer</span>
+        <span class="t-hov">Telecom</span>
+    </span>
+    <span class="tag-sep">|</span>
+    <span class="tag-term">
+        <span class="t-def">Disruptive Innovation</span>
+        <span class="t-hov">Entrepreneurship</span>
+    </span>
+</div>
                 </div>
                 <div class="profile-container">
                     <img src="profile.jpg" alt="Adrián Toledo" class="profile-img">
@@ -201,7 +255,7 @@
             <div class="social-links">
                 <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">LinkedIn</a>
                 <a href="mailto:adriantoledo@duck.com">Email Contact</a>
-                <a href="https://cal.com/adriantoledomtz" target="_blank" style="background-color: var(--accent); color: var(--bg-color); border-color: var(--accent);">Book Interview</a>
+                <a href="https://cal.com/adriantoledomtz" target="_blank" class="btn-book">Book Interview</a>
             </div>
         </header>
 
