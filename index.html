@@ -35,14 +35,14 @@
 
         /* HEADER */
         header { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
-        h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; letter-spacing: -1.5px; margin-bottom: 10px; }
-        .tagline { font-family: 'Fira Code', monospace; color: var(--accent); font-size: 1.1rem; margin-bottom: 25px; }
+        h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; letter-spacing: -1px; margin-bottom: 10px; }
+        .tagline { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--accent); font-size: 1.1rem; margin-bottom: 25px; }
         .bio { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin-bottom: 30px; }
         
         .social-links a {
             color: var(--text-main); text-decoration: none; border: 1px solid var(--border);
             padding: 10px 20px; border-radius: 4px; margin-right: 12px; transition: all 0.3s ease;
-            font-size: 0.9rem; font-family: 'Fira Code', monospace; backdrop-filter: blur(5px); display: inline-block; margin-bottom: 10px;
+            font-size: 0.95rem; font-family: 'Inter', sans-serif; font-weight: 600; backdrop-filter: blur(5px); display: inline-block; margin-bottom: 10px;
         }
         .social-links a:hover { background-color: var(--accent); color: var(--bg-color); border-color: var(--accent); }
 
@@ -50,8 +50,8 @@
         .tabs { display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
         .tab-btn {
             background: var(--card-bg); color: var(--text-main); border: 1px solid var(--border);
-            padding: 10px 20px; border-radius: 30px; cursor: pointer; font-family: 'Fira Code', monospace;
-            transition: 0.3s; font-size: 0.9rem; backdrop-filter: blur(5px);
+            padding: 10px 20px; border-radius: 30px; cursor: pointer; font-family: 'Inter', sans-serif;
+            transition: 0.3s; font-size: 0.95rem; backdrop-filter: blur(5px); font-weight: 500;
         }
         .tab-btn.active, .tab-btn:hover { background: var(--accent); color: var(--bg-color); border-color: var(--accent); font-weight: 600; }
 
@@ -61,8 +61,7 @@
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        h2 { font-size: 2rem; margin-bottom: 30px; color: #fff; font-weight: 600; display: flex; align-items: center; }
-        h2::before { content: '~/'; color: var(--accent); margin-right: 10px; font-family: 'Fira Code', monospace; font-weight: 400;}
+        h2 { font-size: 2rem; margin-bottom: 30px; color: #fff; font-weight: 600; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
         
         /* GRIDS & CARDS */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
@@ -75,14 +74,14 @@
         .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(88, 166, 255, 0.05); }
         
         .card h3 { color: #fff; font-size: 1.25rem; margin-bottom: 5px; }
-        .meta { color: var(--accent); font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-bottom: 15px; display: block; }
-        .card p, .card ul { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.5; }
+        .meta { color: var(--accent); font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-bottom: 15px; display: block; font-weight: 500; }
+        .card p, .card ul { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.6; }
         .card ul { padding-left: 20px; }
         
         .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
-        .tech-tag { font-family: 'Fira Code', monospace; font-size: 0.75rem; border: 1px solid var(--border); color: var(--text-muted); padding: 4px 10px; border-radius: 20px; background: rgba(0,0,0,0.3); }
+        .tech-tag { font-family: 'Inter', sans-serif; font-size: 0.8rem; border: 1px solid var(--border); color: var(--text-main); padding: 4px 12px; border-radius: 20px; background: rgba(0,0,0,0.3); }
 
-        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-family: 'Fira Code', monospace; font-size: 0.85rem; margin-top: 60px; }
+        footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-top: 60px; }
     </style>
 </head>
 <body>
@@ -94,28 +93,28 @@
         <!-- HEADER -->
         <header>
             <h1>Adrián Toledo Martínez</h1>
-            <div class="tagline">Math & Telecom Engineering | Quant Strategy | Tech Ops</div>
+            <div class="tagline">Math & Telecom Engineering | Strategy & Product | Emergency Operations</div>
             <p class="bio">
                 Combining an advanced technical background in test development engineering and mathematical modeling with strong executive leadership and crisis management experience. Proven track record in international academic research (CERN), high-tech innovation, and institutional representation. Driven by continuous learning and complex problem-solving.
             </p>
             <div class="social-links">
-                <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">linkedin()</a>
-                <a href="mailto:adriantoledo@duck.com">email()</a>
+                <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">LinkedIn</a>
+                <a href="mailto:adriantoledo@duck.com">Email Contact</a>
             </div>
         </header>
 
         <!-- INTERACTIVE NAVIGATION -->
         <div class="tabs">
-            <button class="tab-btn active" onclick="showSection('all')">View_All</button>
-            <button class="tab-btn" onclick="showSection('education')">Education_&_Awards</button>
-            <button class="tab-btn" onclick="showSection('experience')">Experience_&_Projects</button>
-            <button class="tab-btn" onclick="showSection('leadership')">Leadership_&_Volunteering</button>
-            <button class="tab-btn" onclick="showSection('skills')">Skills_&_Certs</button>
+            <button class="tab-btn active" onclick="showSection('all')">View All</button>
+            <button class="tab-btn" onclick="showSection('education')">Education & Awards</button>
+            <button class="tab-btn" onclick="showSection('experience')">Experience & Projects</button>
+            <button class="tab-btn" onclick="showSection('leadership')">Leadership & Volunteering</button>
+            <button class="tab-btn" onclick="showSection('skills')">Skills & Certifications</button>
         </div>
 
         <!-- SECTION: EDUCATION -->
         <div id="education" class="cv-section active">
-            <h2>education_and_awards</h2>
+            <h2>Education & Awards</h2>
             <div class="grid-2">
                 <div class="card">
                     <h3>Universitat Politècnica de València</h3>
@@ -148,7 +147,7 @@
 
         <!-- SECTION: EXPERIENCE & PROJECTS -->
         <div id="experience" class="cv-section active">
-            <h2>experience_and_projects</h2>
+            <h2>Experience & Projects</h2>
             <div class="grid-2">
                 <div class="card">
                     <h3>Celestica - Test Design Engineering</h3>
@@ -208,7 +207,7 @@
 
         <!-- SECTION: LEADERSHIP -->
         <div id="leadership" class="cv-section active">
-            <h2>leadership_and_volunteering</h2>
+            <h2>Leadership & Volunteering</h2>
             <div class="grid-2">
                 <div class="card">
                     <h3>Civil Protection - Head of Local Unit</h3>
@@ -245,7 +244,7 @@
 
         <!-- SECTION: SKILLS & CERTS -->
         <div id="skills" class="cv-section active">
-            <h2>skills_certs_and_languages</h2>
+            <h2>Skills, Certifications & Languages</h2>
             <div class="grid-2">
                 <div class="card" style="grid-column: 1 / -1;">
                     <h3>Technical & Soft Skills</h3>
@@ -301,30 +300,26 @@
         </div>
 
         <footer>
-            <p>System.out.print("© 2026 Adrián Toledo Martínez");</p>
+            <p>© 2026 Adrián Toledo Martínez</p>
         </footer>
 
     </div>
 
     <!-- SCRIPT DE LAS PARTÍCULAS Y FILTROS -->
     <script>
-        // Lógica de los botones/tabs
         function showSection(sectionId) {
-            // Actualizar botones
             let btns = document.getElementsByClassName("tab-btn");
             for (let i = 0; i < btns.length; i++) {
                 btns[i].classList.remove("active");
             }
             event.currentTarget.classList.add("active");
 
-            // Mostrar/Ocultar secciones
             let sections = document.getElementsByClassName("cv-section");
             for (let i = 0; i < sections.length; i++) {
                 if (sectionId === 'all') {
                     sections[i].style.display = "block";
-                    // Forzar animación
                     sections[i].style.animation = 'none';
-                    sections[i].offsetHeight; /* trigger reflow */
+                    sections[i].offsetHeight;
                     sections[i].style.animation = null;
                 } else {
                     if (sections[i].id === sectionId) {
@@ -339,7 +334,6 @@
             }
         }
 
-        // Lógica del Canvas (Fondo interactivo)
         const canvas = document.getElementById("particle-canvas");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
