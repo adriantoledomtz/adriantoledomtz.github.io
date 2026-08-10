@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ETIQUETAS META SEO Y VISTA PREVIA (WHATSAPP/LINKEDIN) -->
     <title>Adrián Toledo | Professional Portfolio</title>
+    <meta name="description" content="Scientist, Engineer & Disruptive Innovator. Combining an advanced technical background with strong executive leadership.">
+    <meta property="og:title" content="Adrián Toledo | Professional Portfolio">
+    <meta property="og:description" content="Scientist, Engineer & Disruptive Innovator. Combining an advanced technical background with strong executive leadership.">
+    <!-- Nota: Cambia 'https://tudominio.com' por tu dominio real de GitHub Pages para que la foto cargue en WhatsApp -->
+    <meta property="og:image" content="https://adriantoledomtz.github.io/profile.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="icon" type="image/png" href="cropped_circle_image.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg-color: #050505; 
@@ -14,6 +25,11 @@
             --accent: #7CFF01; /* Verde Monster */
             --card-bg: rgba(22, 27, 34, 0.6); 
             --border: #30363d;
+        }
+
+        /* COLORBLIND MODE OVERRIDE */
+        body.colorblind {
+            --accent: #FFD700; /* Amarillo de alto contraste */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,66 +62,54 @@
         }
 
         .title-wrapper {
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: max-content; /* Obliga a la caja a medir exactamente lo que mide el H1 */
+            max-width: 100%;
         }
 
         h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; letter-spacing: -1px; margin-bottom: 10px; }
+        
         .tagline { 
             font-family: 'Inter', sans-serif; 
             font-weight: 600; 
             color: var(--accent); 
             font-size: 1.1rem; 
             margin-bottom: 25px;
-            display: flex; /* Alineación perfecta con el contenedor */
+            display: flex; 
             align-items: center;
-            gap: 15px; /* Espaciado entre las barras */
+            justify-content: space-between; /* Empuja los extremos a la A y a la z */
+            width: 100%; /* Toma el ancho exacto de tu nombre */
             cursor: default;
         }
 
-        .tag-term {
+        .tag-term { 
             display: inline-grid; 
-        }
-
-        /* 1. Pegamos "Scientist" al borde izquierdo exacto de tu nombre */
-        .tag-term:nth-child(1) {
-            text-align: left; 
-            width: 145px; /* Ancho milimétrico para "Mathematician" */
-        }
-
-        /* 2. Mantenemos el centro perfectamente alineado */
-        .tag-term:nth-child(3) {
-            text-align: center;
-            width: 90px; /* Ancho milimétrico para "Engineer / Telecom" */
-        }
-
-        /* 3. Ajustamos el tercer bloque */
-        .tag-term:nth-child(5) {
-            text-align: left;
-            width: 195px; /* Ancho milimétrico para "Disruptive Innovation" */
+            text-align: center; /* Centra las palabras cortas dentro del espacio sobrante */
         }
         
         .t-def, .t-hov {
-            grid-area: 1 / 1; /* Pone ambas palabras en el mismo sitio */
+            grid-area: 1 / 1; 
             transition: all 0.3s ease;
         }
         
         .t-hov {
             opacity: 0;
-            transform: translateY(10px); /* Prepara la palabra nueva abajo */
+            transform: translateY(10px); 
         }
         
         .tagline:hover .t-def {
             opacity: 0;
-            transform: translateY(-10px); /* Sube la palabra original */
+            transform: translateY(-10px); 
         }
         
         .tagline:hover .t-hov {
             opacity: 1;
-            transform: translateY(0); /* Entra la nueva */
+            transform: translateY(0); 
         }
         
         .tag-sep {
-            color: var(--text-muted); /* Hace que las barras sean un poco más sutiles */
+            color: var(--text-muted); 
         }
         
         /* PROFILE PICTURE & HOVER EFFECTS */
@@ -116,54 +120,26 @@
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid var(--border);
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación fluida de rebote */
+            box-shadow: 0 0 20px rgba(124, 255, 1, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             cursor: pointer;
             flex-shrink: 0;
             background-color: var(--card-bg);
         }
 
+        body.colorblind .profile-container {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.05);
+        }
+
         .profile-container:hover {
             transform: scale(1.25); 
             border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(124, 255, 1, 0.4); /* Aura verde Monster */
+            box-shadow: 0 0 30px rgba(124, 255, 1, 0.4); 
             z-index: 10;
         }
 
-        /* EFECTO DESPLEGABLE PARA CERTIFICACIONES */
-        .cert-list {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 0;
-        }
-        .cert-item {
-            padding: 10px 15px;
-            border-radius: 6px;
-            margin-bottom: 5px;
-            border-left: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        .cert-item:hover {
-            background: rgba(124, 255, 1, 0.05);
-            border-left-color: var(--accent);
-        }
-        .cert-title {
-            color: var(--text-main);
-            font-weight: 600;
-        }
-        .cert-details {
-            max-height: 0;
-            overflow: hidden;
-            opacity: 0;
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            transition: all 0.4s ease;
-        }
-        .cert-item:hover .cert-details {
-            max-height: 150px;
-            opacity: 1;
-            margin-top: 8px;
+        body.colorblind .profile-container:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.4); 
         }
 
         .profile-img {
@@ -176,12 +152,12 @@
         /* TEXTO "HELLO" HUECO */
         .hello-overlay {
             position: absolute;
-            bottom: 15px; /* Posición por la zona del pecho */
+            bottom: 15px; 
             left: 0;
             width: 100%;
             height: 38px;
-            background-color: #fff; /* Franja blanca */
-            color: #000; /* Letras negras para el efecto máscara */
+            background-color: #fff; 
+            color: #000; 
             display: flex;
             align-items: center;
             justify-content: center;
@@ -189,7 +165,7 @@
             font-weight: 900;
             font-size: 1.2rem;
             letter-spacing: 4px;
-            mix-blend-mode: screen; /* Esto convierte el negro en hueco transparente */
+            mix-blend-mode: screen; 
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s ease;
@@ -200,7 +176,6 @@
             transform: translateY(0);
         }
 
-        /* CONTINUACIÓN DEL ESTILO */
         .bio { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin-bottom: 30px; }
         
         .social-links a {
@@ -209,6 +184,7 @@
             font-size: 0.95rem; font-family: 'Inter', sans-serif; font-weight: 600; backdrop-filter: blur(5px); display: inline-block; margin-bottom: 10px;
         }
         .social-links a:hover { background-color: var(--accent); color: var(--bg-color); border-color: var(--accent); }
+        
         /* ESTILOS DEL BOTÓN DE ENTREVISTA */
         .social-links a.btn-book {
             background-color: var(--accent);
@@ -217,12 +193,15 @@
             font-weight: 700;
             box-shadow: 0 0 10px rgba(124, 255, 1, 0.1);
         }
+        body.colorblind .social-links a.btn-book { box-shadow: 0 0 10px rgba(255, 215, 0, 0.1); }
+        
         .social-links a.btn-book:hover {
             background-color: transparent;
             color: var(--accent);
             box-shadow: 0 0 20px rgba(124, 255, 1, 0.6);
             transform: translateY(-2px);
         }
+        body.colorblind .social-links a.btn-book:hover { box-shadow: 0 0 20px rgba(255, 215, 0, 0.6); }
 
         /* INTERACTIVE TABS */
         .tabs { display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; }
@@ -248,28 +227,70 @@
             background-color: var(--card-bg); border: 1px solid var(--border); 
             border-radius: 6px; padding: 25px; transition: all 0.3s ease; backdrop-filter: blur(10px);
         }
-        .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(88, 166, 255, 0.05); }
+        .card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(124, 255, 1, 0.05); }
+        body.colorblind .card:hover { box-shadow: 0 10px 30px rgba(255, 215, 0, 0.05); }
         
         .card h3 { color: #fff; font-size: 1.25rem; margin-bottom: 5px; }
         .meta { color: var(--accent); font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-bottom: 15px; display: block; font-weight: 500; }
         .card p, .card ul { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 15px; line-height: 1.6; }
         .card ul { padding-left: 20px; }
         
+        /* EFECTO DESPLEGABLE PARA CERTIFICACIONES */
+        .cert-list { list-style: none; padding-left: 0; margin-bottom: 0; }
+        .cert-item { padding: 10px 15px; border-radius: 6px; margin-bottom: 5px; border-left: 2px solid transparent; transition: all 0.3s ease; cursor: default; }
+        .cert-item:hover { background: rgba(124, 255, 1, 0.05); border-left-color: var(--accent); }
+        body.colorblind .cert-item:hover { background: rgba(255, 215, 0, 0.05); }
+        .cert-title { color: var(--text-main); font-weight: 600; }
+        .cert-details { max-height: 0; overflow: hidden; opacity: 0; color: var(--text-muted); font-size: 0.85rem; transition: all 0.4s ease; }
+        .cert-item:hover .cert-details { max-height: 150px; opacity: 1; margin-top: 8px; }
+
         .tech-stack { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
         .tech-tag { font-family: 'Inter', sans-serif; font-size: 0.8rem; border: 1px solid var(--border); color: var(--text-main); padding: 4px 12px; border-radius: 20px; background: rgba(0,0,0,0.3); }
 
         footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-top: 60px; }
 
+        /* LANGUAGE & ACCESSIBILITY SWITCHER */
+        .lang-switch {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            z-index: 100;
+            display: flex; 
+            align-items: center;
+        }
+        .lang-switch a { color: var(--text-muted); text-decoration: none; transition: 0.3s ease; font-weight: 500; }
+        .lang-switch a:hover { color: var(--accent); }
+        .lang-switch .active { color: var(--text-main); font-weight: 700; pointer-events: none; }
+        
+        .cb-btn {
+            background: none; border: none; cursor: pointer; font-size: 1.1rem;
+            color: var(--text-muted); transition: 0.3s; margin-right: 15px;
+        }
+        .cb-btn:hover, .cb-btn.active { color: var(--accent); }
+
+        /* ACCESSIBILITY: KEYBOARD NAVIGATION */
+        *:focus-visible { outline: 2px dashed var(--accent); outline-offset: 4px; }
+
+        /* ACCESSIBILITY: REDUCED MOTION */
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
+            #particle-canvas { display: none; } 
+        }
+
         /* RESPONSIVE (MÓVIL) */
         @media (max-width: 768px) { 
+            .lang-switch { top: 15px; right: 15px; }
             .grid-2 { grid-template-columns: 1fr; } 
             .header-title-row { flex-direction: column-reverse; align-items: flex-start; }
             .profile-container { margin-bottom: 15px; }
+            .title-wrapper { width: 100%; } 
             
-            /* Apilamos el tagline en móvil para que se vea perfecto */
             .tagline { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .tag-sep { display: none; } /* Ocultamos las | en móvil */
-            .tag-term { width: auto; text-align: left; }
+            .tag-sep { display: none; } 
+            .tag-term { width: auto !important; text-align: left !important; }
         }
     </style>
 </head>
@@ -279,27 +300,34 @@
 
     <div class="container">
         
+        <!-- LANGUAGE & ACCESSIBILITY SWITCHER -->
+        <div class="lang-switch">
+            <button onclick="toggleColorblind()" class="cb-btn" id="cbBtn" title="Colorblind Mode" aria-label="Toggle Colorblind Mode">👁️</button>
+            <span style="margin-right: 10px; color: var(--border);">|</span>
+            <span class="active">EN</span> <span style="margin: 0 8px; color: var(--border);">|</span> <a href="/es">ES</a>
+        </div>
+        
         <!-- HEADER -->
         <header>
             <div class="header-title-row">
                 <div class="title-wrapper">
                     <h1>Adrián Toledo Martínez</h1>
                     <div class="tagline">
-    <span class="tag-term">
-        <span class="t-def">Scientist</span>
-        <span class="t-hov">Mathematician</span>
-    </span>
-    <span class="tag-sep">|</span>
-    <span class="tag-term">
-        <span class="t-def">Engineer</span>
-        <span class="t-hov">Telecom</span>
-    </span>
-    <span class="tag-sep">|</span>
-    <span class="tag-term">
-        <span class="t-def">Disruptive Innovation</span>
-        <span class="t-hov">Entrepreneurship</span>
-    </span>
-</div>
+                        <span class="tag-term">
+                            <span class="t-def">Scientist</span>
+                            <span class="t-hov">Mathematician</span>
+                        </span>
+                        <span class="tag-sep">|</span>
+                        <span class="tag-term">
+                            <span class="t-def">Engineer</span>
+                            <span class="t-hov">Telecom</span>
+                        </span>
+                        <span class="tag-sep">|</span>
+                        <span class="tag-term">
+                            <span class="t-def">Disruptive Innovation</span>
+                            <span class="t-hov">Entrepreneurship</span>
+                        </span>
+                    </div>
                 </div>
                 <div class="profile-container">
                     <img src="profile.jpg" alt="Adrián Toledo" class="profile-img">
@@ -547,7 +575,13 @@
             </div>
         </div>
 
-        <!-- SCRIPT DE CAL.COM (Modal flotante) -->
+        <footer>
+            <p>© 2026 Adrián Toledo Martínez</p>
+        </footer>
+
+    </div>
+
+    <!-- SCRIPT DE CAL.COM (Modal flotante) -->
     <script>
       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.cal = C.cal || function () { let p = C.cal.q = C.cal.q || []; p.push(arguments); }; let js = d.createElement(A); let sc = d.getElementsByTagName(A)[0]; js.src="https://app.cal.com/embed/embed.js"; sc.parentNode.insertBefore(js, sc); })(window, "script", "cal");
       
@@ -556,20 +590,15 @@
           "theme": "dark",
           "styles": {
               "branding": {
-                  "brandColor": "#7CFF01" /* Tu verde Monster inyectado en el calendario */
+                  "brandColor": "#7CFF01"
               }
           }
       });
     </script>
-        
-        <footer>
-            <p>© 2026 Adrián Toledo Martínez</p>
-        </footer>
 
-    </div>
-
-    <!-- SCRIPT DE LAS PARTÍCULAS Y FILTROS -->
+    <!-- SCRIPT DE LAS PARTÍCULAS, FILTROS Y ACCESIBILIDAD -->
     <script>
+        // LÓGICA DEL MENÚ DE PESTAÑAS
         function showSection(sectionId) {
             let btns = document.getElementsByClassName("tab-btn");
             for (let i = 0; i < btns.length; i++) {
@@ -597,6 +626,15 @@
             }
         }
 
+        // ACCESSIBILITY: TOGGLE COLORBLIND
+        let isColorblind = false;
+        function toggleColorblind() {
+            isColorblind = !isColorblind;
+            document.body.classList.toggle('colorblind');
+            document.getElementById('cbBtn').classList.toggle('active');
+        }
+
+        // LÓGICA DEL CANVAS (PARTÍCULAS)
         const canvas = document.getElementById("particle-canvas");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
@@ -666,13 +704,16 @@
 
         function connect() {
             let opacityValue = 1;
+            // El color cambia dinámicamente si el modo daltónico está activo
+            let rgbColor = isColorblind ? '255, 215, 0' : '124, 255, 1'; 
+
             for (let a = 0; a < particlesArray.length; a++) {
                 for (let b = a; b < particlesArray.length; b++) {
                     let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                     + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                     if (distance < (canvas.width / 10) * (canvas.height / 10)) {
                         opacityValue = 1 - (distance / 15000);
-                        ctx.strokeStyle = 'rgba(88, 166, 255,' + opacityValue * 0.2 + ')';
+                        ctx.strokeStyle = `rgba(${rgbColor}, ${opacityValue * 0.2})`; 
                         ctx.lineWidth = 1;
                         ctx.beginPath();
                         ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
