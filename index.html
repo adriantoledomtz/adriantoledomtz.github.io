@@ -64,7 +64,7 @@
         .title-wrapper {
             display: flex;
             flex-direction: column;
-            width: max-content; /* Obliga a la caja a medir exactamente lo que mide el H1 */
+            width: max-content; /* Obliga a la caja a medir EXACTAMENTE lo que mide el <h1> */
             max-width: 100%;
         }
 
@@ -78,38 +78,38 @@
             margin-bottom: 25px;
             display: flex; 
             align-items: center;
-            justify-content: space-between; /* Empuja los extremos a la A y a la z */
-            width: 100%; /* Toma el ancho exacto de tu nombre */
+            justify-content: space-between; /* Empuja los extremos a la A y a la z, y reparte los espacios idénticamente */
+            width: 100%; /* Toma el ancho milimétrico heredado del nombre */
             cursor: default;
         }
 
         .tag-term { 
             display: inline-grid; 
-            text-align: center; /* Centra las palabras cortas dentro del espacio sobrante */
+            text-align: center; /* Centra las palabras cortas dentro del espacio de las largas */
         }
         
         .t-def, .t-hov {
-            grid-area: 1 / 1; 
+            grid-area: 1 / 1; /* Pone ambas palabras en el mismo sitio */
             transition: all 0.3s ease;
         }
         
         .t-hov {
             opacity: 0;
-            transform: translateY(10px); 
+            transform: translateY(10px); /* Prepara la palabra nueva abajo */
         }
         
         .tagline:hover .t-def {
             opacity: 0;
-            transform: translateY(-10px); 
+            transform: translateY(-10px); /* Sube la palabra original */
         }
         
         .tagline:hover .t-hov {
             opacity: 1;
-            transform: translateY(0); 
+            transform: translateY(0); /* Entra la nueva */
         }
         
         .tag-sep {
-            color: var(--text-muted); 
+            color: var(--text-muted); /* Hace que las barras sean un poco más sutiles */
         }
         
         /* PROFILE PICTURE & HOVER EFFECTS */
@@ -121,7 +121,7 @@
             overflow: hidden;
             border: 2px solid var(--border);
             box-shadow: 0 0 20px rgba(124, 255, 1, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación fluida de rebote */
             cursor: pointer;
             flex-shrink: 0;
             background-color: var(--card-bg);
@@ -134,7 +134,7 @@
         .profile-container:hover {
             transform: scale(1.25); 
             border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(124, 255, 1, 0.4); 
+            box-shadow: 0 0 30px rgba(124, 255, 1, 0.4); /* Aura verde Monster */
             z-index: 10;
         }
 
@@ -152,12 +152,12 @@
         /* TEXTO "HELLO" HUECO */
         .hello-overlay {
             position: absolute;
-            bottom: 15px; 
+            bottom: 15px; /* Posición por la zona del pecho */
             left: 0;
             width: 100%;
             height: 38px;
-            background-color: #fff; 
-            color: #000; 
+            background-color: #fff; /* Franja blanca */
+            color: #000; /* Letras negras para el efecto máscara */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -165,7 +165,7 @@
             font-weight: 900;
             font-size: 1.2rem;
             letter-spacing: 4px;
-            mix-blend-mode: screen; 
+            mix-blend-mode: screen; /* Esto convierte el negro en hueco transparente */
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.3s ease;
@@ -176,6 +176,7 @@
             transform: translateY(0);
         }
 
+        /* CONTINUACIÓN DEL ESTILO */
         .bio { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin-bottom: 30px; }
         
         .social-links a {
@@ -286,10 +287,11 @@
             .grid-2 { grid-template-columns: 1fr; } 
             .header-title-row { flex-direction: column-reverse; align-items: flex-start; }
             .profile-container { margin-bottom: 15px; }
-            .title-wrapper { width: 100%; } 
+            .title-wrapper { width: 100%; } /* <--- AÑADE ESTA LÍNEA AQUÍ */
             
+            /* Apilamos el tagline en móvil para que se vea perfecto */
             .tagline { flex-direction: column; align-items: flex-start; gap: 5px; }
-            .tag-sep { display: none; } 
+            .tag-sep { display: none; } /* Ocultamos las | en móvil */
             .tag-term { width: auto !important; text-align: left !important; }
         }
     </style>
@@ -340,8 +342,9 @@
             </p>
             <div class="social-links">
                 <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">LinkedIn</a>
-                <a href="mailto:adriantoledomtz@gmail.com">Email Contact</a>
-                <a href="javascript:void(0);" data-cal-link="adriantoledomtz" class="btn-book">Book Interview</a>
+                <a href="mailto:adriantoledo@duck.com">Email Contact</a>
+                <!-- Link corregido para que abra modal o nueva pestaña si falla el script -->
+                <a href="https://cal.com/adriantoledomtz/interview" target="_blank" data-cal-link="adriantoledomtz/interview" class="btn-book">Book Interview</a>
             </div>
         </header>
 
