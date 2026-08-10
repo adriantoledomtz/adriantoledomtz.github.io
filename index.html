@@ -56,16 +56,32 @@
             color: var(--accent); 
             font-size: 1.1rem; 
             margin-bottom: 25px;
-            display: inline-flex; /* Mantiene los elementos en línea */
+            display: flex; /* Alineación perfecta con el contenedor */
             align-items: center;
-            gap: 12px; /* Espacio exacto alrededor de las barras */
+            gap: 15px; /* Espaciado entre las barras */
             cursor: default;
         }
-        
+
         .tag-term {
             display: inline-grid; 
+        }
+
+        /* 1. Pegamos "Scientist" al borde izquierdo exacto de tu nombre */
+        .tag-term:nth-child(1) {
+            text-align: left; 
+            width: 145px; /* Ancho milimétrico para "Mathematician" */
+        }
+
+        /* 2. Mantenemos el centro perfectamente alineado */
+        .tag-term:nth-child(3) {
             text-align: center;
-            width: 230px; /* Forzamos la simetría exacta en los 3 bloques */
+            width: 90px; /* Ancho milimétrico para "Engineer / Telecom" */
+        }
+
+        /* 3. Ajustamos el tercer bloque */
+        .tag-term:nth-child(5) {
+            text-align: left;
+            width: 195px; /* Ancho milimétrico para "Disruptive Innovation" */
         }
         
         .t-def, .t-hov {
