@@ -63,8 +63,9 @@
         }
         
         .tag-term {
-            display: inline-grid; /* Truco de la caja para que no se mueva nada */
+            display: inline-grid; 
             text-align: center;
+            width: 230px; /* Forzamos la simetría exacta en los 3 bloques */
         }
         
         .t-def, .t-hov {
@@ -107,10 +108,46 @@
         }
 
         .profile-container:hover {
-            transform: scale(1.25); /* Hace grande la imagen */
+            transform: scale(1.25); 
             border-color: var(--accent);
-            box-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
+            box-shadow: 0 0 30px rgba(124, 255, 1, 0.4); /* Aura verde Monster */
             z-index: 10;
+        }
+
+        /* EFECTO DESPLEGABLE PARA CERTIFICACIONES */
+        .cert-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+        }
+        .cert-item {
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            border-left: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+        .cert-item:hover {
+            background: rgba(124, 255, 1, 0.05);
+            border-left-color: var(--accent);
+        }
+        .cert-title {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+        .cert-details {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: all 0.4s ease;
+        }
+        .cert-item:hover .cert-details {
+            max-height: 150px;
+            opacity: 1;
+            margin-top: 8px;
         }
 
         .profile-img {
@@ -212,6 +249,11 @@
             .grid-2 { grid-template-columns: 1fr; } 
             .header-title-row { flex-direction: column-reverse; align-items: flex-start; }
             .profile-container { margin-bottom: 15px; }
+            
+            /* Apilamos el tagline en móvil para que se vea perfecto */
+            .tagline { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .tag-sep { display: none; } /* Ocultamos las | en móvil */
+            .tag-term { width: auto; text-align: left; }
         }
     </style>
 </head>
@@ -255,7 +297,7 @@
             <div class="social-links">
                 <a href="https://linkedin.com/in/adriantoledomtz" target="_blank">LinkedIn</a>
                 <a href="mailto:adriantoledo@duck.com">Email Contact</a>
-                <a href="https://cal.com/adriantoledomtz" target="_blank" class="btn-book">Book Interview</a>
+                <a href="javascript:void(0);" data-cal-link="adriantoledomtz" class="btn-book">Book Interview</a>
             </div>
         </header>
 
@@ -429,16 +471,43 @@
                 </div>
                 <div class="card">
                     <h3>Certifications & Executive Programs</h3>
-                    <ul>
-                        <li><strong>Skills UP (2026):</strong> High-performance talent program (Airbus, Siemens, BBVA).</li>
-                        <li><strong>Qualcomm 5G Associate (2026):</strong> 5G wireless architecture.</li>
-                        <li><strong>Executive Leadership Program (2025):</strong> Business strategy with CEOs.</li>
-                        <li><strong>Santander X Explorer (2025):</strong> Lean startup project incubation.</li>
-                        <li><strong>Lombard Design Thinking (2025):</strong> Silicon Valley innovation.</li>
-                        <li><strong>Deep Web & Cybersecurity (2024):</strong> EC-Council.</li>
-                        <li><strong>Intelligence Masterclass - CNI (2022).</strong></li>
-                        <li><strong>Advanced Physics Training (2021) & Antenna Workshop (2023).</strong></li>
-                        <li><strong>IVASPE:</strong> Large Events Operations (2026) & Civil Protection (2020).</li>
+                    <ul class="cert-list">
+                        <li class="cert-item">
+                            <span class="cert-title">Skills UP (2026)</span>
+                            <div class="cert-details">High-performance talent program focused on executive skills and corporate networking with top management from Airbus, Siemens, PwC, BBVA, and NTT DATA.</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Qualcomm 5G Associate (2026)</span>
+                            <div class="cert-details">Technical certification in 5G wireless network architecture, radio access protocols, and emerging telecommunication technologies.</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Executive Leadership Program (2025)</span>
+                            <div class="cert-details">Intensive business strategy training through direct sessions with CEOs and executive visits to corporate headquarters (Porcelanosa, Air Nostrum).</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Santander X Explorer (2025)</span>
+                            <div class="cert-details">96-hour intensive project incubation program applying Lean Startup methodology, market validation, and business model development.</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Lombard Design Thinking (2025)</span>
+                            <div class="cert-details">Advanced certification based on Silicon Valley innovation ecosystems, intensive market research, and product-market fit strategies.</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Deep Web & Cybersecurity (2024)</span>
+                            <div class="cert-details">Specialized technical training by the EC-Council covering cybersecurity, vulnerability analysis, and network architectures.</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Intelligence Masterclass - CNI (2022)</span>
+                            <div class="cert-details">Strategic session on national and international security led by the Directorate of the Spanish National Intelligence Centre.</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">Advanced Physics & Hardware</span>
+                            <div class="cert-details">72 hours of advanced physics instruction (OEF 2021) and practical construction of 5 hardware antennas with QSO execution (RadioClub UPV 2023).</div>
+                        </li>
+                        <li class="cert-item">
+                            <span class="cert-title">IVASPE Emergency Operations</span>
+                            <div class="cert-details">Official training in Civil Protection (2020) and specialized course in large event operations and crowd management (2026).</div>
+                        </li>
                     </ul>
                 </div>
                 <div class="card">
@@ -462,17 +531,20 @@
             </div>
         </div>
 
-        <!-- SECTION: BOOK INTERVIEW -->
-<div id="interview" class="cv-section">
-    <h2>Schedule a Meeting</h2>
-    <div class="card" style="padding: 10px; overflow: hidden; border-color: var(--accent);">
-        <!-- El parámetro theme=dark fuerza el modo oscuro de Cal.com -->
-        <iframe src="https://cal.com/adriantoledomtz?theme=dark" 
-                style="width: 100%; height: 650px; border: none; border-radius: 8px;" 
-                title="Book an interview with Adrián Toledo">
-        </iframe>
-    </div>
-</div>
+        <!-- SCRIPT DE CAL.COM (Modal flotante) -->
+    <script>
+      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.cal = C.cal || function () { let p = C.cal.q = C.cal.q || []; p.push(arguments); }; let js = d.createElement(A); let sc = d.getElementsByTagName(A)[0]; js.src="https://app.cal.com/embed/embed.js"; sc.parentNode.insertBefore(js, sc); })(window, "script", "cal");
+      
+      cal("init", {origin:"https://cal.com"});
+      cal("ui", {
+          "theme": "dark",
+          "styles": {
+              "branding": {
+                  "brandColor": "#7CFF01" /* Tu verde Monster inyectado en el calendario */
+              }
+          }
+      });
+    </script>
         
         <footer>
             <p>© 2026 Adrián Toledo Martínez</p>
