@@ -33,26 +33,81 @@
 
         .container { max-width: 1000px; margin: 0 auto; padding: 80px 20px; position: relative; z-index: 1; }
 
-        /* HEADER */
+        /* HEADER LAYOUT */
         header { margin-bottom: 40px; border-bottom: 1px solid var(--border); padding-bottom: 40px; }
         
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--border);
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.05);
-            transition: all 0.3s ease;
+        .header-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
         }
-        .profile-img:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(88, 166, 255, 0.2);
+
+        .title-wrapper {
+            flex: 1;
         }
 
         h1 { font-size: 3.5rem; font-weight: 800; color: #ffffff; letter-spacing: -1px; margin-bottom: 10px; }
-        .tagline { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--accent); font-size: 1.1rem; margin-bottom: 25px; }
+        .tagline { font-family: 'Inter', sans-serif; font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+        
+        /* PROFILE PICTURE & HOVER EFFECTS */
+        .profile-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border);
+            box-shadow: 0 0 20px rgba(88, 166, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animación fluida de rebote */
+            cursor: pointer;
+            flex-shrink: 0;
+            background-color: var(--card-bg);
+        }
+
+        .profile-container:hover {
+            transform: scale(1.25); /* Hace grande la imagen */
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
+            z-index: 10;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* TEXTO "HELLO" HUECO */
+        .hello-overlay {
+            position: absolute;
+            bottom: 15px; /* Posición por la zona del pecho */
+            left: 0;
+            width: 100%;
+            height: 38px;
+            background-color: #fff; /* Franja blanca */
+            color: #000; /* Letras negras para el efecto máscara */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            mix-blend-mode: screen; /* Esto convierte el negro en hueco transparente */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .profile-container:hover .hello-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* CONTINUACIÓN DEL ESTILO */
         .bio { font-size: 1.1rem; color: var(--text-muted); max-width: 800px; margin-bottom: 30px; }
         
         .social-links a {
@@ -81,7 +136,6 @@
         
         /* GRIDS & CARDS */
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; }
-        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
         
         .card { 
             background-color: var(--card-bg); border: 1px solid var(--border); 
@@ -98,6 +152,13 @@
         .tech-tag { font-family: 'Inter', sans-serif; font-size: 0.8rem; border: 1px solid var(--border); color: var(--text-main); padding: 4px 12px; border-radius: 20px; background: rgba(0,0,0,0.3); }
 
         footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; color: var(--text-muted); font-family: 'Inter', sans-serif; font-size: 0.9rem; margin-top: 60px; }
+
+        /* RESPONSIVE (MÓVIL) */
+        @media (max-width: 768px) { 
+            .grid-2 { grid-template-columns: 1fr; } 
+            .header-title-row { flex-direction: column-reverse; align-items: flex-start; }
+            .profile-container { margin-bottom: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -108,9 +169,17 @@
         
         <!-- HEADER -->
         <header>
-            <img src="profile.jpg" alt="Adrián Toledo" class="profile-img">
-            <h1>Adrián Toledo Martínez</h1>
-            <div class="tagline">Math & Telecom Engineering | Strategy & Product | Emergency Operations</div>
+            <div class="header-title-row">
+                <div class="title-wrapper">
+                    <h1>Adrián Toledo Martínez</h1>
+                    <div class="tagline">Math & Telecom Engineering | Strategy & Product | Emergency Operations</div>
+                </div>
+                <div class="profile-container">
+                    <img src="profile.jpg" alt="Adrián Toledo" class="profile-img">
+                    <div class="hello-overlay">HELLO</div>
+                </div>
+            </div>
+            
             <p class="bio">
                 Combining an advanced technical background in test development engineering and mathematical modeling with strong executive leadership and crisis management experience. Proven track record in international academic research (CERN), high-tech innovation, and institutional representation. Driven by continuous learning and complex problem-solving.
             </p>
